@@ -1,0 +1,58 @@
+1. Users Table:
+   - `id`: SERIAL PRIMARY KEY
+   - `name`: VARCHAR(100) UNIQUE NOT NULL
+   - `email`: VARCHAR(100) UNIQUE NOT NULL
+   - `password`: VARCHAR(100) NOT NULL
+------------------------------------------
+CREATE TYPE user_role AS ENUM ('doctor', 'patient');
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) UNIQUE NOT NULL,
+  username VARCHAR(50) UNIQUE NOT NULL CHECK (username !~ '\s'),
+  email VARCHAR(100) UNIQUE NOT NULL CHECK (email !~ '\s'),
+  password VARCHAR(100) NOT NULL CHECK (password !~ '\s'),
+  role user_role NOT NULL
+);
+=================================================================
+=================================================================
+2. Doctors Table:
+   - `id`: SERIAL PRIMARY KEY
+   - `doctor_id`: INTEGER REFERENCES users(id) ON DELETE CASCADE UNIQUE
+   - `specialty`: VARCHAR(100)
+------------------------------------------
+CREATE TABLE doctors (
+  id SERIAL PRIMARY KEY,
+  doctor_id INTEGER REFERENCES users(id) ON DELETE CASCADE UNIQUE,
+  specialty VARCHAR(100)
+);
+=================================================================
+=================================================================
+3. Slots Table:
+   - `id`: SERIAL PRIMARY KEY
+   - `doctor_id`: INTEGER REFERENCES doctors(doctor_id) ON DELETE CASCADE
+   - `date`: DATE NOT NULL
+   - `start_time`: TIME NOT NULL
+   - `end_time`: TIME NOT NULL
+   - `reservations_num`: INTEGER NOT NULL
+------------------------------------------
+CREATE TABLE slots (
+  id SERIAL PRIMARY KEY,
+  doctor_id INTEGER REFERENCES doctors(doctor_id) ON DELETE CASCADE,
+  date DATE NOT NULL,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
+  reservations_num INTEGER NOT NULL
+);
+=================================================================
+4. Appointments Table:
+   - `id`: SERIAL PRIMARY KEY
+   - `patient_id`: INTEGER REFERENCES users(id) ON DELETE CASCADE
+   - `slot_id`: INTEGER REFERENCES slots(id) ON DELETE CASCADE
+------------------------------------------
+CREATE TABLE appointments (
+  id SERIAL PRIMARY KEY,
+  patient_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  slot_id INTEGER REFERENCES slots(id) ON DELETE CASCADE
+);
+=================================================================
