@@ -78,7 +78,16 @@ exports.cancelDoctorSlot = async (req, res) => {
 exports.doctorSlots = async (req, res) => {
   try {
     const doctor_id = req.params.id;
-
+    
+    // Check if the doctor is registered
+    const existingDoctor = await pool.query(
+      'SELECT * FROM doctors WHERE doctor_id = $1',
+      [doctor_id]
+    );
+    
+    if (existingDoctor.rows.length === 0) {
+      return res.status(400).json({ message: 'There Is No Doctor Registered With This Id' });
+    }
     // Retrieve all slots for the doctor
     const doctorSlots = await pool.query(
       'SELECT * FROM slots WHERE doctor_id = $1',
