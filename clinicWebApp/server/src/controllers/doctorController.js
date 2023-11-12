@@ -1,98 +1,113 @@
-// server/src/controllers/doctorController.js
+clinicWebApp/server/src/controllers/doctorsController.js
 
 const pool = require('../../database');
+const {
+  addDoctorSlotCheckExistingQuery,
+  addDoctorSlotReservedQuery,
+  addDoctorSlotInsertQuery,
+  cancelDoctorSlotCheckExistingQuery,
+  cancelDoctorSlotDeleteQuery,
+  retrieveDoctorSlotsQuery,
+} = require('../queries/doctorsQueries');
 
 exports.addDoctorSlot = async (req, res) => {
+  const client = await pool.connect();
   try {
-    //const doctor_id  = req.params.id;
-    const { doctor_id , date, start_time, end_time, reservations_num } = req.body;
+    await client.query('BEGIN'); // Start the transaction
+
+    const { doctor_id, date, start_time, end_time, reservations_num } = req.body;
 
     // Check if the slot is already inserted
-    const existingSlot = await pool.query(
-        'SELECT * FROM slots WHERE doctor_id = $1 AND date = $2 AND start_time <= $3 AND end_time >= $4',
-        [doctor_id, date, end_time, start_time]
-    );
-  
+    const existingSlot = await client.query(addDoctorSlotCheckExistingQuery, [
+      doctor_id,
+      date,
+      start_time,
+      end_time,
+    ]);
+
     if (existingSlot.rows.length > 0) {
-        return res.status(400).json({ message: 'Slot Is Already Added' });
+      await client.query('ROLLBACK'); // Rollback the transaction
+      return res.status(400).json({ message: 'Slot Is Already Added' });
     }
 
     // Check if the slot is reserved by another doctor
-    const reservedSlot = await pool.query(
-        'SELECT * FROM slots WHERE doctor_id != $1 AND date = $2 AND start_time < $3 AND end_time > $4',
-        [doctor_id, date, end_time, start_time]
-    );
-  
+    const reservedSlot = await client.query(addDoctorSlotReservedQuery, [
+      doctor_id,
+      date,
+      end_time,
+      start_time,
+    ]);
+
     if (reservedSlot.rows.length > 0) {
-        return res.status(400).json({ message: 'Slot Is Reserved By Another Doctor' });
+      await client.query('ROLLBACK'); // Rollback the transaction
+      return res.status(400).json({ message: 'Slot Is Reserved By Another Doctor' });
     }
 
     // Create a new slot
-    await pool.query(
-      'INSERT INTO slots (doctor_id, date, start_time, end_time, reservations_num) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [doctor_id, date, start_time, end_time, reservations_num]
-    );
+    const newSlot = await client.query(addDoctorSlotInsertQuery, [
+      doctor_id,
+      date,
+      start_time,
+      end_time,
+      reservations_num,
+    ]);
 
-    // Retrieve all slots for the doctor
-    const doctorSlots = await pool.query(
-      'SELECT * FROM slots WHERE doctor_id = $1',
-      [doctor_id]
-    );
+    await client.query('COMMIT'); // Commit the transaction
 
-    res.json({ slots: doctorSlots.rows });
+    res.json({ slot: newSlot.rows[0] });
   } catch (error) {
     console.error(error);
+    await client.query('ROLLBACK'); // Rollback the transaction in case of an error
     res.status(500).json({ message: 'Internal Server Error' });
+  } finally {
+    client.release(); // Release the database connection
   }
 };
 
 exports.cancelDoctorSlot = async (req, res) => {
+  const client = await pool.connect();
   try {
-    //const doctor_id  = req.params.id;
-    const { doctor_id, slot_id }  = req.body;
+    await client.query('BEGIN'); // Start the transaction
 
-    const existingSlot = await pool.query(
-      'SELECT * FROM slots WHERE doctor_id = $1 AND id = $2',
-      [doctor_id, slot_id]
-    ); 
+    const { doctor_id, slot_id } = req.body;
+
+    const existingSlot = await client.query(cancelDoctorSlotCheckExistingQuery, [
+      doctor_id,
+      slot_id,
+    ]);
 
     if (existingSlot.rows.length > 0) {
-      
-      await pool.query(
-        'DELETE FROM slots WHERE doctor_id = $1 AND id = $2',
-        [doctor_id, slot_id]
-      );
-
+      await client.query(cancelDoctorSlotDeleteQuery, [doctor_id, slot_id]);
+      await client.query('COMMIT'); // Commit the transaction
       res.json({ message: 'Slot canceled successfully' });
-      
     } else {
-      res.status(400).json({ message: "You Do Not Have a Slot With This ID" });
+      await client.query('ROLLBACK'); // Rollback the transaction
+      res.status(400).json({ message: 'You Do Not Have a Slot With This ID' });
     }
-
   } catch (error) {
     console.error(error);
+    await client.query('ROLLBACK'); // Rollback the transaction in case of an error
     res.status(500).json({ message: 'Internal server error' });
+  } finally {
+    client.release(); // Release the database connection
   }
 };
 
 exports.doctorSlots = async (req, res) => {
   try {
     const doctor_id = req.params.id;
-    
+
     // Check if the doctor is registered
-    const existingDoctor = await pool.query(
-      'SELECT * FROM doctors WHERE doctor_id = $1',
-      [doctor_id]
-    );
-    
+    const existingDoctor = await pool.query('SELECT * FROM doctors WHERE doctor_id = $1', [
+      doctor_id,
+    ]);
+
     if (existingDoctor.rows.length === 0) {
       return res.status(400).json({ message: 'There Is No Doctor Registered With This Id' });
     }
+
     // Retrieve all slots for the doctor
-    const doctorSlots = await pool.query(
-      'SELECT * FROM slots WHERE doctor_id = $1',
-      [doctor_id]
-    );
+    const doctorSlots = await pool.query(retrieveDoctorSlotsQuery, [doctor_id]);
 
     res.json({ slots: doctorSlots.rows });
   } catch (error) {
