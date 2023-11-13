@@ -1,0 +1,36 @@
+.home-container {
+  background-color: #a0e8e4;
+  background-image: url(https://www.riomed.com/wp-content/uploads/2022/01/twitter-post.png);
+  background-size: auto;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-position: bottom right;
+}
+
+.home-container h1 {
+  text-decoration: underline;
+  background-color: #a0e8e4;
+  color: black;
+}
+
+.home-container div {
+  background-color: #ff988f;
+}
+
+.home-container nav ul {
+  list-style: circle inside;
+  padding: 10px;
+  margin: 8px;
+}
+
+.home-container nav li {
+  display: inline-flex;
+  font-size: larger;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.home-container nav a {
+  text-decoration: none;
+  color: white;
+}
