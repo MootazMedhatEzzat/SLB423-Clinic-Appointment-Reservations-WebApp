@@ -10,6 +10,7 @@ const DoctorDashboard = () => {
   const [slotIdToCancel, setSlotIdToCancel] = useState(0);
   const [message, setMessage] = useState('');
   const userId = localStorage.getItem('userId');
+  const name = localStorage.getItem('name');
 
   const fetchDoctorSlots = async () => {
     try {
@@ -95,7 +96,7 @@ const DoctorDashboard = () => {
 
   return (
     <div className="doctor-dashboard-container">
-      <h2>Welcome Doctor</h2>
+      <h2>Welcome Doctor {name}</h2>
       <h3>My Slots</h3>
       <table>
         <thead>
