@@ -1,4 +1,4 @@
-clinicWebApp/server/src/controllers/doctorsController.js
+//clinicWebApp/server/src/controllers/doctorsController.js
 
 const pool = require('../../database');
 const {
