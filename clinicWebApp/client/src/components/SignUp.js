@@ -23,6 +23,7 @@ const SignUp = () => {
       const response = await axios.post('/api/signup', user);
       localStorage.setItem('token', response.data.token); 
       localStorage.setItem('userId', response.data.userId); 
+      localStorage.setItem('name', user.name); 
       if (user.role === 'doctor') {
         navigate('/doctors/dashboard'); 
       } else {
