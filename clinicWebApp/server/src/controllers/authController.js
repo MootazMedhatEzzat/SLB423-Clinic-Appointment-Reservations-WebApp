@@ -71,12 +71,12 @@ exports.signIn = async (req, res) => {
 
     // Generate a JWT token
     //const token = jwt.sign({ userId: existingUser.rows[0].id }, 'your-secret-key');
-    const token = jwt.sign({ userId: existingUser.rows[0].id, role: existingUser.rows[0].role }, 'your-secret-key');
+    const token = jwt.sign({ userId: existingUser.rows[0].id, name:existingUser.rows[0].name, role: existingUser.rows[0].role }, 'your-secret-key');
 
     await client.query('COMMIT'); // Commit the transaction
 
     //res.json({ token });
-    res.json({ userId: existingUser.rows[0].id, role: existingUser.rows[0].role, token });
+    res.json({ userId: existingUser.rows[0].id, name:existingUser.rows[0].name, role: existingUser.rows[0].role, token });
   } catch (error) {
     console.error('Error signing in:', error);
     await client.query('ROLLBACK'); // Rollback the transaction in case of an error
