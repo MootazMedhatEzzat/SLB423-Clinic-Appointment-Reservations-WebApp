@@ -2,6 +2,20 @@
 
 const pool = require('../../database');
 
+exports.getDoctors = async (req, res) => {
+  try {
+    // Get the all doctors
+    const doctors = await pool.query(
+      'SELECT doctors.doctor_id, users.name FROM doctors INNER JOIN users ON doctors.doctor_id = users.id'
+    );
+
+    res.json({ doctors: doctors.rows });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
 exports.getDoctorSlots = async (req, res) => {
   try {
     const doctorId  = req.params.id;
