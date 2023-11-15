@@ -109,7 +109,7 @@ const DoctorDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {slots.map((slot) => (
+          {slots && slots.map((slot) => (
             <tr key={slot.id}>
               <td>{slot.id}</td>
               <td>{formatDate(slot.date)}</td>
