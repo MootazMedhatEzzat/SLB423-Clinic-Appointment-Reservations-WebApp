@@ -48,6 +48,7 @@ const PatientDashboard = () => {
     }
     fetchReservations();
     setReservations(data.reservations);
+    setMessage('Appointment Reserved Successfully');
   } catch (error) {
     setMessage(error.message);
     console.error(error);
