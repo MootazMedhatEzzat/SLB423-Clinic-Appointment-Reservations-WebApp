@@ -9,6 +9,7 @@ const PatientDashboard = () => {
   const [canceledSlotId, setcanceledSlotId] = useState(0);
   const [message, setMessage] = useState('');
   const userId = localStorage.getItem('userId');
+  const name = localStorage.getItem('name');
 
   const fetchReservations = async () => {
     try {
@@ -107,44 +108,45 @@ const PatientDashboard = () => {
 
   return (
   
-  <div>
-<h2 style={{ fontSize: '2em', marginBottom: '1em' }}>My Appointments</h2>
-<table style={{ borderCollapse: 'collapse', width: '100%' }}>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Appointment</th>
-      <th>Doctor</th>
-    </tr>
-  </thead>
-  <tbody>
-    {reservations.map((reservation) => (
-    <tr key={reservation.appointment_id}>
-      <td>{reservation.slot_id}</td>
-      <td>{formatDate(reservation.date)} - {formatTime(reservation.start_time)} - {formatTime(reservation.end_time)}</td>
-      <td>Dr.{reservation.doctor_name}</td>
-    </tr>
-    ))}
-  </tbody>
-</table>
-<div className="book-appointment-container">
-  <label>Appointment ID:</label>
-  <input type="number" value={slotId} onChange={(e) => setSlotId(e.target.value)} /> 
-  <button onClick={handleBooking}>Book Appointment</button>
-</div>
-<div className="update-appointment-container">
-  <label> Current Appointment ID:</label>
-  <input type="number" value={slotId} onChange={(e) => setSlotId(e.target.value)} />
-  <label>Updated Appointment ID:</label>
-  <input type="number" value={updatedSlotId} onChange={(e) => setUpdatedSlotId(e.target.value)} />
-  <button onClick={handleUpdate}>Update Appointment</button>
-</div>
-<div className="cancel-appointment-container">
-  <label>Appointment ID to Cancel:</label> 
-  <input type="number" value={canceledSlotId} onChange={(e) => setcanceledSlotId(e.target.value)} />
-  <button onClick={handleCancel}>Cancel Appointment</button>
-</div>
-{message && <p style={{ marginTop: '1em', color: '#ff0000' }}>{message}</p>}
+  <div className="patient-dashboard-container">
+    <h2>Welcome {name}</h2>
+    <h3>My Appointments</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Appointment</th>
+          <th>Doctor</th>
+       </tr>
+      </thead>
+      <tbody>
+        {reservations.map((reservation) => (
+          <tr key={reservation.appointment_id}>
+            <td>{reservation.slot_id}</td>
+            <td>{formatDate(reservation.date)} | {formatTime(reservation.start_time)} - {formatTime(reservation.end_time)}</td>
+            <td>Dr.{reservation.doctor_name}</td>
+          </tr>
+       ))}
+     </tbody>
+   </table>
+   <div className="book-appointment-container">
+    <label>Appointment ID:</label>
+    <input type="number" value={slotId} onChange={(e) => setSlotId(e.target.value)} /> 
+    <button onClick={handleBooking}>Book Appointment</button>
+   </div>
+   <div className="update-appointment-container">
+    <label> Current Appointment ID:</label>
+    <input type="number" value={slotId} onChange={(e) => setSlotId(e.target.value)} />
+    <label>Updated Appointment ID:</label>
+    <input type="number" value={updatedSlotId} onChange={(e) => setUpdatedSlotId(e.target.value)} />
+    <button onClick={handleUpdate}>Update Appointment</button>
+  </div>
+  <div className="cancel-appointment-container">
+    <label>Appointment ID to Cancel:</label> 
+    <input type="number" value={canceledSlotId} onChange={(e) => setcanceledSlotId(e.target.value)} />
+    <button onClick={handleCancel}>Cancel Appointment</button>
+  </div>
+  {message && <p className="error-message">{message}</p>}
 </div>
   );
 };
