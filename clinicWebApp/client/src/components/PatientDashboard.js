@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import DoctorDropdown from './DoctorDropdown';
+import SlotsTable from './SlotsTable';
 import '../css/PatientDashboard.css';
 
 const PatientDashboard = () => {
@@ -10,6 +12,8 @@ const PatientDashboard = () => {
   const [message, setMessage] = useState('');
   const userId = localStorage.getItem('userId');
   const name = localStorage.getItem('name');
+  const [doctorId, setDoctorId] = useState(null);
+  const [doctorSlots, setDoctorSlots] = useState([]);
 
   const fetchReservations = async () => {
     try {
@@ -92,6 +96,25 @@ const PatientDashboard = () => {
   }
   };
 
+  const handleDoctorSelect = async (selectedDoctorId) => {
+    setDoctorId(selectedDoctorId);
+    if (selectedDoctorId) {
+      try {
+        const response = await fetch(`/api/patients/${selectedDoctorId}/getslots`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch doctor slots');
+        }
+        const data = await response.json();
+        setDoctorSlots(data.slots);
+      } catch (error) {
+        setMessage(error.message);
+        console.error(error);
+      }
+    } else {
+      setDoctorSlots([]);
+    }
+  };
+
   // Function to format the date in a more readable format
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -109,7 +132,7 @@ const PatientDashboard = () => {
   return (
   
   <div className="patient-dashboard-container">
-    <h2>Welcome {name}</h2>
+    <h2>Welcome <span style={{ color: '#ff988f' }}>{name}</span></h2>
     <h3>My Appointments</h3>
     <table>
       <thead>
@@ -130,6 +153,8 @@ const PatientDashboard = () => {
      </tbody>
    </table>
    <div className="book-appointment-container">
+   <DoctorDropdown onSelect={handleDoctorSelect} />
+      {doctorSlots.length > 0 && <SlotsTable slots={doctorSlots} />}
     <label>Appointment ID:</label>
     <input type="number" value={slotId} onChange={(e) => setSlotId(e.target.value)} /> 
     <button onClick={handleBooking}>Book Appointment</button>
