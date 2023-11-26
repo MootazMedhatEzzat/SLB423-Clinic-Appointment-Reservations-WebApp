@@ -14,7 +14,7 @@ const DoctorDashboard = () => {
 
   const fetchDoctorSlots = async () => {
     try {
-      const response = await fetch(`/api/doctors/slots/${userId}`);
+      const response = await fetch(`http://localhost:3000/api/doctors/slots/${userId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch doctor slots');
       }
@@ -32,7 +32,7 @@ const DoctorDashboard = () => {
 
   const addDoctorSlot = async () => {
     try {
-      const response = await fetch('/api/doctors/addslot', {
+      const response = await fetch('http://localhost:3000/api/doctors/addslot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const DoctorDashboard = () => {
 
   const cancelDoctorSlot = async () => {
     try {
-      const response = await fetch('/api/doctors/cancelslot', {
+      const response = await fetch('http://localhost:3000/api/doctors/cancelslot', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
