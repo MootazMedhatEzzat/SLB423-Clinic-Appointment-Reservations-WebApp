@@ -6,7 +6,7 @@ function DoctorDropdown({ onSelect }) {
 
   useEffect(() => {
     async function fetchDoctors() {
-      const response = await axios.get('/api/patients/getdoctors');
+      const response = await axios.get('http://localhost:3000/api/patients/getdoctors');
       setDoctors(response.data.doctors);
     }
     fetchDoctors();
