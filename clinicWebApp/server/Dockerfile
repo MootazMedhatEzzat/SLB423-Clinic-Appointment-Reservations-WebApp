@@ -1,18 +1,22 @@
-FROM node:18-alpine3.18
+# Use the official Node.js image as a base
+FROM node:20.9.0-alpine3.18
 
-WORKDIR /node-docker-example/
+# Set the working directory inside the container
+WORKDIR /clinicWebApp/server
 
-# Copy package.json and package-lock.json to leverage Docker cache
-COPY . /node-docker-example/
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application
-COPY . .
+# Copy the rest of the files to the working directory
+COPY src ./src
+COPY database.js ./
+COPY server.js ./
 
-# Expose the port
+# Expose the port on which the application will run
 EXPOSE 3000
 
-# Run the application using a non-root user
-CMD ["npm", "start"]
+# Command to start the application
+CMD ["node", "server.js"]
