@@ -19,6 +19,6 @@
 # Running
 Clone the repository and open four terminals:
 - In the first terminal, run:
-  - cd clinicWebApp/client - npm run build
+ - docker network create ui-network                                                                                                                                                        - docker network create api-network
 - In the seconde terminal, run:
 cd clinicWebApp/server -> node serverjs
