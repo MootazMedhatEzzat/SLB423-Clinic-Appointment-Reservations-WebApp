@@ -17,8 +17,8 @@
 - http://localhost:3000/api/patients/:id/reservations
 
 # Running
-Clone the repository and open two terminals:
+Clone the repository and open four terminals:
 - In the first terminal, run:
-cd clinicWebApp/client -> npm run build
+  - cd clinicWebApp/client - npm run build
 - In the seconde terminal, run:
 cd clinicWebApp/server -> node serverjs
