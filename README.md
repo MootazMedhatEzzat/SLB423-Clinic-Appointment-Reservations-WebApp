@@ -1,4 +1,4 @@
-# SLB423-Clinic-Appointment-Reservations-WebApp
+# SLB423-Clinic-Appointment-Reservations-WebApp_Phase-1
 
 # Team members
 - Mootaz Medhat Ezzat Abdelwahab    (20206074)
@@ -19,6 +19,9 @@
 # Running
 Clone the repository and open two terminals:
 - In the first terminal, run:
-cd clinicWebApp/client -> npm run build
+  - `cd clinicWebApp/client`
+  - `npm run build`
+  - `node server.js`
 - In the seconde terminal, run:
-cd clinicWebApp/server -> node serverjs
+  - `cd clinicWebApp/server`
+  - `node server.js`
