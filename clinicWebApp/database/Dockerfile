@@ -1,13 +1,13 @@
-# Use the official PostgreSQL image from Docker Hub
-FROM postgres:16-alpine3.18
+// database.js
 
-# Set environment variables
-ENV POSTGRES_DB clinic_appointments_reservations
-ENV POSTGRES_USER postgres
-#ENV POSTGRES_PASSWORD 17March@2003 (In a development or local environment where security is not a major concern, we might be able to proceed without a password)
+const { Pool } = require('pg');
 
-# Copy the SQL files to initialize the database
-COPY init.sql /docker-entrypoint-initdb.d/
+const pool = new Pool({
+    user: 'postgres',
+    host: 'clinic-web-database-container',
+    database: 'clinic_appointments_reservations',
+    password: '17March@2003',
+    port: 5432,
+});
 
-# Expose the PostgreSQL port
-EXPOSE 5432
+module.exports = pool;
