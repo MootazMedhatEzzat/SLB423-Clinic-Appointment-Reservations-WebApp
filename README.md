@@ -18,7 +18,7 @@
 
 # Running
 ### Clone the repository and execute this script `deploy.sh`
-### Or clone the repository, open terminal and run:
+### Or clone the repository, open terminal, and run:
 - Create docker networks:
   - `docker network create ui-network`
   - `docker network create api-network`
