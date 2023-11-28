@@ -103,8 +103,8 @@ const DoctorDashboard = () => {
           <tr>
             <th>ID</th>
             <th>Date</th>
-            <th>Start Time</th>
-            <th>End Time</th>
+            <th>From</th>
+            <th>To</th>
             <th>Reservations Number</th>
           </tr>
         </thead>
@@ -123,9 +123,9 @@ const DoctorDashboard = () => {
       <div className="add-slot-container">
         <label>Date:</label>
         <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-        <label>Start Time:</label>
+        <label>From:</label>
         <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
-        <label>End Time:</label>
+        <label>To:</label>
         <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
         <label>Reservations Number:</label>
         <input type="number" value={reservationsNum} onChange={(e) => setReservationsNum(e.target.value)} />
