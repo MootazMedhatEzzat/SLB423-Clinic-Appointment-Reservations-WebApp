@@ -2,6 +2,7 @@
 
 CREATE USER myclinicuser WITH PASSWORD 'myclinicpassword';
 CREATE DATABASE myclinicdatabase;
+ALTER DATABASE myclinicdatabase OWNER TO myclinicuser;
 
 CREATE TYPE user_role AS ENUM ('doctor', 'patient');
 
