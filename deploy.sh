@@ -22,5 +22,11 @@ cd ../client
 docker build -t clinic-web-client .
 docker run -d -p 3001:3001 --name clinic-web-frontend --network ui-network clinic-web-client:latest
 
+#listing images
+docker images
+
+#listing running containers
+docker ps
+
 # Return to the initial directory
 cd ../..
