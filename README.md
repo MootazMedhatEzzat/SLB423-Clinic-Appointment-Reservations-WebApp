@@ -17,9 +17,9 @@
 - http://localhost:3000/api/patients/:id/reservations
 
 # Running
-Clone the repository and execute this script `deploy.sh`
+## Clone the repository and execute this script `deploy.sh`
 or
-Clone the repository, open terminal and run:
+## Clone the repository, open terminal and run:
 - Create docker networks:
   - `docker network create ui-network`
   - `docker network create api-network`
