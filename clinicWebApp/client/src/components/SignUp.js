@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/SignUp.css';
 
@@ -54,6 +54,10 @@ const SignUp = () => {
         </select>
         <button type="submit">Sign Up</button>
       </form>
+      <p>
+        Already have an account?{' '}
+        <Link to="/signin" style={{ color: '#007bff' }}>Sign In</Link>
+      </p>
     </div>
   );
 };
