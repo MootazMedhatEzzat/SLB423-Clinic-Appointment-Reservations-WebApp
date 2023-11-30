@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/SignIn.css';
 
@@ -44,6 +44,10 @@ const SignIn = () => {
         <input type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange} />
         <button type="submit">Sign In</button>
       </form>
+      <p>
+        You don't have an account?{' '}
+        <Link to="/signup" style={{ color: '#007bff' }}>Sign Up</Link>
+      </p>
     </div>
   );
 };
