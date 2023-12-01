@@ -56,7 +56,7 @@ const SignUp = () => {
       </form>
       <p>
         Already have an account?{' '}
-        <Link to="/signin" style={{ color: '#007bff' }}>Sign In</Link>
+        <Link to="/signin" style={{ color: '#0056b3' }}>Sign In</Link>
       </p>
     </div>
   );
