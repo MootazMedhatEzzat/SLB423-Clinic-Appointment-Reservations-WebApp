@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; 
 import DoctorDropdown from './DoctorDropdown';
 import SlotsTable from './SlotsTable';
 import '../css/PatientDashboard.css';
@@ -133,7 +134,14 @@ const PatientDashboard = () => {
   return (
   
   <div className="patient-dashboard-container">
-    <h2>Welcome <span style={{ color: '#0056b3' }}>{name}</span></h2>
+    <div className="header-container">
+        <h2>Welcome <span style={{ color: '#0056b3' }}>{name}</span></h2>
+        <div className="top-right">
+          <Link to="/" className="button-link">
+            Home
+          </Link>
+        </div>
+      </div>
     <h3>My Appointments</h3>
     <table>
       <thead>
