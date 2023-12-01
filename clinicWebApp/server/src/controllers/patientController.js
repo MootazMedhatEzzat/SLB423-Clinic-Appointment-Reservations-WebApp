@@ -195,9 +195,9 @@ exports.getPatientReservations = async (req, res) => {
     const reservations = await pool.query(
       `SELECT appointments.id AS appointment_id, slots.id AS slot_id, users.name AS doctor_name, slots.date, slots.start_time, slots.end_time
       FROM appointments
-      INNER JOIN slots ON appointments.slot_id = slots.id
-      INNER JOIN doctors ON slots.doctor_id = doctors.id
-      INNER JOIN users ON doctors.doctor_id = users.id
+      LEFT JOIN slots ON appointments.slot_id = slots.id
+      LEFT JOIN doctors ON slots.doctor_id = doctors.doctor_id
+      LEFT JOIN users ON doctors.doctor_id = users.id
       WHERE appointments.patient_id = $1`,
       [patientId]
     );
