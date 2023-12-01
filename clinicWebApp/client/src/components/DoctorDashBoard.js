@@ -96,7 +96,7 @@ const DoctorDashboard = () => {
 
   return (
     <div className="doctor-dashboard-container">
-      <h2>Welcome Doctor <span style={{ color: '#ff988f' }}>{name}</span></h2>
+      <h2>Welcome Doctor <span style={{ color: '#0056b3' }}>{name}</span></h2>
       <h3>My Slots</h3>
       <table>
         <thead>
