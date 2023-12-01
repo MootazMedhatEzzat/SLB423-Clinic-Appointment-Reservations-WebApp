@@ -46,7 +46,7 @@ const SignIn = () => {
       </form>
       <p>
         You don't have an account?{' '}
-        <Link to="/signup" style={{ color: '#007bff' }}>Sign Up</Link>
+        <Link to="/signup" style={{ color: '#0056b3' }}>Sign Up</Link>
       </p>
     </div>
   );
