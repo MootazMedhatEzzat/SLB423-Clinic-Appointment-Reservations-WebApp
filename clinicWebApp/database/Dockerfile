@@ -9,5 +9,6 @@ ENV POSTGRES_PASSWORD clinic_database_pass
 # Copy the SQL files to initialize the database
 COPY init.sql /docker-entrypoint-initdb.d/
 
-# Expose the PostgreSQL port
-EXPOSE 5432
+# Expose the port specified in the FE_PORT environment variable or use defaultPort (3001) if not provided
+ENV PORT=${DB_PORT:-5432}
+EXPOSE $PORT
