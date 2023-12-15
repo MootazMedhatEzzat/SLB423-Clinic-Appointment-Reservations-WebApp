@@ -1,16 +1,14 @@
-FROM registry.access.redhat.com/rhscl/postgresql-10-rhel7
+# Use the official PostgreSQL image from Docker Hub
+FROM postgres:16-alpine3.18
 
+# Set environment variables
 ENV POSTGRES_DB clinic_database
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD clinic_database_pass
 
+# Copy the SQL files to initialize the database
 COPY init.sql /docker-entrypoint-initdb.d/
 
-# Change permissions on directories
-USER root
-RUN chown -R postgres:postgres /var/lib/pgsql
-USER postgres
-
-# Expose the port specified in the FE_PORT environment variable or use defaultPort (3001) if not provided
+# Expose the port specified in the DB_PORT environment variable or use defaultPort (5432) if not provided
 ENV PORT=${DB_PORT:-5432}
 EXPOSE $PORT
