@@ -18,8 +18,9 @@ COPY server.js ./
 # Build the frontend application
 RUN npm run build
 
-# Expose the port on which the application will run
-EXPOSE 3001
+# Expose the port specified in the FE_PORT environment variable or use defaultPort (3001) if not provided
+ENV PORT=${FE_PORT:-3001}
+EXPOSE $PORT
 
 # Command to start the application
 CMD ["node", "server.js"]
