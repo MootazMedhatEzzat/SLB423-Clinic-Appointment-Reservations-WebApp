@@ -15,8 +15,9 @@ COPY src ./src
 COPY database.js ./
 COPY server.js ./
 
-# Expose the port on which the application will run
-EXPOSE 3000
+# Expose the port specified in the BE_PORT environment variable or use defaultPort (3000) if not provided
+ENV PORT=${BE_PORT:-3000}
+EXPOSE $PORT
 
 # Command to start the application
 CMD ["node", "server.js"]
