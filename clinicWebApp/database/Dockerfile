@@ -6,6 +6,9 @@ ENV POSTGRES_DB clinic_database
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD clinic_database_pass
 
+# Change ownership of the directories
+RUN chown -R postgres:postgres /var/lib/postgresql/data /var/run/postgresql
+
 # Copy the SQL files to initialize the database
 COPY init.sql /docker-entrypoint-initdb.d/
 
