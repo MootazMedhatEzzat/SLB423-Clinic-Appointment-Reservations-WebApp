@@ -7,7 +7,7 @@ ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD clinic_database_pass
 
 # Set a custom data directory
-ENV PGDATA /var/lib/postgresql/custom-data
+ENV PGDATA /var/lib/postgresql/data/custom-data
 
 # Copy the SQL files to initialize the database
 COPY init.sql /docker-entrypoint-initdb.d/
@@ -19,5 +19,8 @@ EXPOSE $PORT
 # Run the entrypoint script as root to handle permission adjustments
 USER root
 
+# Create a custom data directory and set permissions
+RUN mkdir -p $PGDATA && chown -R postgres:postgres $PGDATA
+
 # Use the custom data directory
-CMD ["postgres", "-c", "config_file=/var/lib/postgresql/custom-data/postgresql.conf"]
+CMD ["postgres", "-c", "config_file=/var/lib/postgresql/data/custom-data/postgresql.conf"]
