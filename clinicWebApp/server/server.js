@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 //app.use(cors());
 app.use(cors({
   origin: '*',
+  exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'],
 }));
 
 const doctorRoutes = require('./src/routes/doctors');
