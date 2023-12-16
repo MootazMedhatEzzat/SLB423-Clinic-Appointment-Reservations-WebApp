@@ -1,19 +1,16 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const https = require('https');
+const fs = require('fs');
+
 const app = express();
 
 const defaultPort = 3000;
 const port = process.env.BE_PORT || process.argv[2] || defaultPort;
 
 app.use(bodyParser.json());
-
-// Configure CORS to allow requests from your frontend domain
-app.use(cors({
-  origin: 'https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+app.use(cors());
 
 const doctorRoutes = require('./src/routes/doctors');
 const patientRoutes = require('./src/routes/patients');
@@ -23,6 +20,15 @@ app.use('/api', doctorRoutes);
 app.use('/api', patientRoutes);
 app.use('/api', authRoutes);
 
-app.listen(port, () => {
-  console.log(`Backend server is running on port ${port}`);
+// Use the OpenShift provided certificate and key
+const credentials = {
+  key: fs.readFileSync('/var/run/secrets/kubernetes.io/serviceaccount/service-ca.key'),
+  cert: fs.readFileSync('/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt'),
+};
+
+// Create an HTTPS server
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(port, () => {
+  console.log(`Backend server is running on port ${port} (HTTPS)`);
 });
