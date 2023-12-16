@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import '../css/DoctorDashboard.css';
 
 const DoctorDashboard = () => {
@@ -7,8 +7,7 @@ const DoctorDashboard = () => {
   const [date, setDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
-  const [reservationsNum, setReservationsNum] = useState(0);
-  const [slotIdToCancel, setSlotIdToCancel] = useState(0);
+  const [reservationsNum, setReservationsNum] = useState(1);
   const [message, setMessage] = useState('');
   const userId = localStorage.getItem('userId');
   const name = localStorage.getItem('name');
@@ -33,6 +32,18 @@ const DoctorDashboard = () => {
 
   const addDoctorSlot = async () => {
     try {
+      if (!date || !startTime || !endTime || isNaN(reservationsNum) || reservationsNum < 0) {
+        throw new Error('Please provide valid date, time, and reservations number.');
+      }
+  
+      const currentDate = new Date();
+      const selectedDate = new Date(`${date}T${startTime}`);
+      
+      // Check if the selected date is in the past
+      if (selectedDate < currentDate) {
+        throw new Error('Please select a future date and time.');
+      }
+  
       const response = await fetch('http://localhost:3000/api/doctors/addslot', {
         method: 'POST',
         headers: {
@@ -59,7 +70,7 @@ const DoctorDashboard = () => {
     }
   };
 
-  const cancelDoctorSlot = async () => {
+  const cancelDoctorSlot = async (slotId) => {
     try {
       const response = await fetch('http://localhost:3000/api/doctors/cancelslot', {
         method: 'DELETE',
@@ -68,28 +79,26 @@ const DoctorDashboard = () => {
         },
         body: JSON.stringify({
           doctor_id: userId,
-          slot_id: slotIdToCancel,
+          slot_id: slotId,
         }),
       });
       if (!response.ok) {
-        throw new Error(data.message);
+        throw new Error(response.statusText);
       }
       fetchDoctorSlots();
       setMessage('Slot Canceled Successfully');
     } catch (error) {
-      setMessage(error.message);
+      setMessage(`Failed to cancel slot: ${error.message}`);
       console.error(error);
     }
   };
 
-  // Function to format the date in a more readable format
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
   };
-  
-  // Function to format the time in AM/PM format
+
   const formatTime = (timeString) => {
     const time = new Date(`2000-01-01T${timeString}`);
     return time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
@@ -98,7 +107,9 @@ const DoctorDashboard = () => {
   return (
     <div className="doctor-dashboard-container">
       <div className="header-container">
-        <h2>Welcome Doctor <span style={{ color: '#0056b3' }}>{name}</span></h2>
+        <h2>
+          Welcome Doctor <span style={{ color: '#0056b3' }}>{name}</span>
+        </h2>
         <div className="top-right">
           <Link to="/" className="button-link">
             Home
@@ -109,23 +120,26 @@ const DoctorDashboard = () => {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Reservations Number</th>
+            <th style={{ textAlign: 'center' }}>Date</th>
+            <th style={{ textAlign: 'center' }}>From</th>
+            <th style={{ textAlign: 'center' }}>To</th>
+            <th style={{ textAlign: 'center' }}>Reservations Number</th>
+            <th style={{ textAlign: 'center' }}>Edit</th>
           </tr>
         </thead>
         <tbody>
-          {slots && slots.map((slot) => (
-            <tr key={slot.id}>
-              <td>{slot.id}</td>
-              <td>{formatDate(slot.date)}</td>
-              <td>{formatTime(slot.start_time)}</td>
-              <td>{formatTime(slot.end_time)}</td>
-              <td>{slot.reservations_num}</td>
-            </tr>
-          ))}
+          {slots &&
+            slots.map((slot) => (
+              <tr key={slot.id}>
+                <td style={{ textAlign: 'center' }}>{formatDate(slot.date)}</td>
+                <td style={{ textAlign: 'center' }}>{formatTime(slot.start_time)}</td>
+                <td style={{ textAlign: 'center' }}>{formatTime(slot.end_time)}</td>
+                <td style={{ textAlign: 'center' }}>{slot.reservations_num}</td>
+                <td style={{ textAlign: 'center' }}>
+                  <button onClick={() => cancelDoctorSlot(slot.id)}>Cancel</button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
       <div className="add-slot-container">
@@ -136,13 +150,8 @@ const DoctorDashboard = () => {
         <label>To:</label>
         <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
         <label>Reservations Number:</label>
-        <input type="number" value={reservationsNum} onChange={(e) => setReservationsNum(e.target.value)} />
+        <input type="number" min="1" value={reservationsNum} onChange={(e) => setReservationsNum(e.target.value)} />
         <button onClick={addDoctorSlot}>Add Slot</button>
-      </div>
-      <div className="cancel-slot-container">
-        <label>Slot ID to Cancel:</label>
-        <input type="number" value={slotIdToCancel} onChange={(e) => setSlotIdToCancel(e.target.value)} />
-        <button onClick={cancelDoctorSlot}>Cancel Slot</button>
       </div>
       {message && <p className="error-message">{message}</p>}
     </div>
