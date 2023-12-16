@@ -9,7 +9,7 @@ const defaultPort = 3000;
 const port = process.env.BE_PORT || process.argv[2] || defaultPort;
 
 app.use(bodyParser.json());
-app.use(cors());s
+app.use(cors());
 
 const doctorRoutes = require('./src/routes/doctors');
 const patientRoutes = require('./src/routes/patients');
