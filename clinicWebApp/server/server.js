@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -9,9 +7,11 @@ const defaultPort = 3000;
 const port = process.env.BE_PORT || process.argv[2] || defaultPort;
 
 app.use(bodyParser.json());
-//app.use(cors());
+
+// Configure CORS to allow requests from your frontend domain
 app.use(cors({
-  origin: '*',
+  origin: 'https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
 
