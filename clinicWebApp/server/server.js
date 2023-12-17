@@ -5,7 +5,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 
-const app = express();
 // Set middleware of CORS 
 app.use((req, res, next) => {
   res.setHeader(
