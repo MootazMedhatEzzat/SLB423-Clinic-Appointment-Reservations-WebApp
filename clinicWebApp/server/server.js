@@ -17,6 +17,12 @@ const corsOptions = {
   credentials: true, // Enable credentials (cookies, HTTP authentication)
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
+
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
 //app.use(cors());
 
 const doctorRoutes = require('./src/routes/doctors');
