@@ -21,7 +21,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Handle preflight requests
-app.options('Access-Control-Allow-Origin', cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 //app.use(cors());
 
