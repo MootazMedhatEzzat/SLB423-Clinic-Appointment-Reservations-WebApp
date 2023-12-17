@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 // Configure CORS to allow requests from a specific origin (e.g., https://example.com)
 const corsOptions = {
-  origin: 'https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com/',
+  origin: 'https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
