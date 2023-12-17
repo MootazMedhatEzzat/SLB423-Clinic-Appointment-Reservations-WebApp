@@ -10,13 +10,13 @@ const port = process.env.BE_PORT || process.argv[2] || defaultPort;
 
 app.use(bodyParser.json());
 
-// Specify your frontend's domain in the CORS configuration
+// Configure CORS to allow requests from your frontend domain
 const corsOptions = {
   origin: 'https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com',
-  optionsSuccessStatus: 200, // some legacy browsers choke on 204
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Enable credentials (cookies, HTTP authentication)
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
-
-app.use(cors(corsOptions));
 //app.use(cors());
 
 const doctorRoutes = require('./src/routes/doctors');
