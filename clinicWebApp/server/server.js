@@ -1,5 +1,5 @@
 // server.js
-/*
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -7,38 +7,6 @@ const app = express();
 
 const defaultPort = 3000;
 const port = process.env.BE_PORT || process.argv[2] || defaultPort;
-
-app.use(bodyParser.json());
-app.use(cors());
-
-const doctorRoutes = require('./src/routes/doctors');
-const patientRoutes = require('./src/routes/patients');
-const authRoutes = require('./src/routes/auth');
-
-app.use('/api', doctorRoutes);
-app.use('/api', patientRoutes);
-app.use('/api', authRoutes);
-
-app.listen(port, () => {
-  console.log(`Backend server is running on port ${port}`);
-});
-*/
-
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-//const https = require('https');
-//const fs = require('fs');
-
-const app = express();
-
-const defaultPort = 3000;
-const port = process.env.BE_PORT || process.argv[2] || defaultPort;
-
-// Load SSL certificate and private key
-//const privateKey = fs.readFileSync('/path/to/private-key.pem', 'utf8');
-//const certificate = fs.readFileSync('/path/to/certificate.pem', 'utf8');
-//const credentials = { key: privateKey, cert: certificate };
 
 app.use(bodyParser.json());
 
@@ -49,6 +17,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+//app.use(cors());
 
 const doctorRoutes = require('./src/routes/doctors');
 const patientRoutes = require('./src/routes/patients');
@@ -58,9 +27,6 @@ app.use('/api', doctorRoutes);
 app.use('/api', patientRoutes);
 app.use('/api', authRoutes);
 
-// Create an HTTPS server
-//const httpsServer = https.createServer(credentials, app);
-
-httpsServer.listen(port, () => {
+app.listen(port, () => {
   console.log(`Backend server is running on port ${port}`);
 });
