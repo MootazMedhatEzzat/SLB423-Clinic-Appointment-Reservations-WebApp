@@ -14,9 +14,10 @@ const corsOptions = {
   origin: 'https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com',
 };
 
+const app = express();
+
 app.use(cors(corsOptions));
 
-const app = express();
 //app.use(cors());
 
 const doctorRoutes = require('./src/routes/doctors');
