@@ -3,6 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const app = express();
 
 const defaultPort = 3000;
 const port = process.env.BE_PORT || process.argv[2] || defaultPort;
@@ -13,8 +14,6 @@ app.use(bodyParser.json());
 const corsOptions = {
   origin: 'https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com',
 };
-
-const app = express();
 
 app.use(cors(corsOptions));
 
