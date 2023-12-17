@@ -3,7 +3,6 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const app = express();
 
 const defaultPort = 3000;
 const port = process.env.BE_PORT || process.argv[2] || defaultPort;
@@ -17,6 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+const app = express();
 //app.use(cors());
 
 const doctorRoutes = require('./src/routes/doctors');
