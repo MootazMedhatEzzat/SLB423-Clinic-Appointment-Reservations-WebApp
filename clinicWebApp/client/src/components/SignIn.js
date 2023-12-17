@@ -19,7 +19,6 @@ const SignIn = () => {
       const response = await axios.post('https://clinic-web-server-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com/api/signin', user, {
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'https://clinic-web-server-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com',
         },
       });
       localStorage.setItem('token', response.data.token);
