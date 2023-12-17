@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 // Handle preflight requests
 //app.options('*', cors(corsOptions));
 
-//app.use(cors());
+app.use(cors());
 
 const doctorRoutes = require('./src/routes/doctors');
 const patientRoutes = require('./src/routes/patients');
