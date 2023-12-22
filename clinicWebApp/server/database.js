@@ -4,6 +4,7 @@ const { Pool } = require('pg');
 
 const defaultDbPort = 5432;
 const dbPort = process.env.DB_PORT || defaultDbPort;
+const dbPort = process.env.DB_HOST || defaultDbPort;
 
 const pool = new Pool({
     user: 'postgres',
