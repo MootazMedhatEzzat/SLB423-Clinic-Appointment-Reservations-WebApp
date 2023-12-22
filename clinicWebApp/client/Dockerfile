@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Set the backend URL as an environment variable with the correct prefix
-ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL:-http://localhost:3000}
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL:-https://clinic-web-server-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com}
 
 # Copy the rest of the files to the working directory
 COPY src ./src
