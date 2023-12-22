@@ -10,13 +10,13 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Set the backend URL as an environment variable with the correct prefix
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL:-http://localhost:3000}
+
 # Copy the rest of the files to the working directory
 COPY src ./src
 COPY public ./public
 COPY server.js ./
-
-# Set the backend URL as an environment variable with the correct prefix
-ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL:-http://localhost:3000}
 
 # Build the frontend application
 RUN npm run build
