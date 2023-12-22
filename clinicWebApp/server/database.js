@@ -16,6 +16,6 @@ const pool = new Pool({
 });
 
 console.log(`Database server is running on port ${dbPort}`);
-console.log(`Database host is running on port ${dbHost}`);
+console.log(`Database is running on host ${dbHost}`);
 
 module.exports = pool;
