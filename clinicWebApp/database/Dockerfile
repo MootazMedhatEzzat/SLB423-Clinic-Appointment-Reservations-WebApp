@@ -12,6 +12,3 @@ COPY init.sql /docker-entrypoint-initdb.d/
 # Expose the port specified in the DB_PORT environment variable or use defaultPort (5432) if not provided
 ENV PORT=${DB_PORT:-5432}
 EXPOSE $PORT
-
-# Use the custom data directory
-CMD ["postgres", "-c", "config_file=/var/lib/postgresql/data/custom-data/postgresql.conf"]
