@@ -15,6 +15,7 @@ COPY src ./src
 COPY database.js ./
 COPY server.js ./
 
+# Set the database host as an environment variable
 ENV PORT=${DB_HOST:-clinic-web-database-container}
 
 # Expose the port specified in the BE_PORT environment variable or use defaultPort (3000) if not provided
