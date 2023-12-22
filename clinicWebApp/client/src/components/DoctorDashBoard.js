@@ -44,7 +44,7 @@ const DoctorDashboard = () => {
         throw new Error('Please select a future date and time.');
       }
   
-      const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/api/doctors/addslot', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/doctors/addslot`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
