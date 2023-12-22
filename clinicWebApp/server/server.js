@@ -11,8 +11,7 @@ const port = process.env.BE_PORT || process.argv[2] || defaultPort;
 app.use(bodyParser.json());
 //app.use(cors());
 app.use(cors({
-  origin: ['https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com'],
-  credentials: true,
+  origin: 'https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com',
 }));
 
 const doctorRoutes = require('./src/routes/doctors');
