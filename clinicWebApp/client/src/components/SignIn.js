@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/SignIn.css';
 
 const SignIn = () => {
-
-  // Initialize the useNavigate hook
   const navigate = useNavigate();
-
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
   const [error, setError] = useState(null);
+  const [backendUrl, setBackendUrl] = useState('');
+
+  useEffect(() => {
+    // Fetch the backend URL from environment variable or configuration
+    const backendUrlFromEnv = process.env.REACT_APP_BACKEND_URL;
+    setBackendUrl(backendUrlFromEnv);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://clinic-web-server-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com/api/signin', user);
+      const response = await axios.post(`${backendUrl}/api/signin`, user);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.userId);
       localStorage.setItem('name', response.data.name); 
