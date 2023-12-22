@@ -7,7 +7,7 @@ const dbPort = process.env.DB_PORT || defaultDbPort;
 
 const pool = new Pool({
     user: 'postgres',
-    host: 'clinic-web-database-container',
+    host: 'clinic-web-database',
     database: 'clinic_database',
     password: 'clinic_database_pass',
     port: dbPort,
