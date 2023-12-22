@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/SignIn.css';
 
 const SignIn = () => {
+
+  // Initialize the useNavigate hook
   const navigate = useNavigate();
+
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
   const [error, setError] = useState(null);
-  const [backendUrl, setBackendUrl] = useState('');
 
-  useEffect(() => {
-    // Fetch the backend URL from environment variable or configuration
-    const backendUrlFromEnv = process.env.REACT_APP_BACKEND_URL;
-    setBackendUrl(backendUrlFromEnv);
-  }, []);
-
+  // Directly set the environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
