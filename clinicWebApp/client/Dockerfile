@@ -22,5 +22,8 @@ RUN npm run build
 ENV PORT=${FE_PORT:-3001}
 EXPOSE $PORT
 
+# Set the backend URL as an environment variable
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+
 # Command to start the application
 CMD ["node", "server.js"]
