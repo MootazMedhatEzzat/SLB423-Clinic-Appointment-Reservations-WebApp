@@ -15,4 +15,5 @@ app.get('/*', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Frontend server is running on port ${port}`);
+  console.log(`Backend URL ${process.env.REACT_APP_BACKEND_URL}`);
 });
