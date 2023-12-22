@@ -4,8 +4,6 @@ import axios from 'axios';
 import '../css/SignIn.css';
 
 const SignIn = () => {
-
-  // Initialize the useNavigate hook
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -14,17 +12,20 @@ const SignIn = () => {
   });
   const [error, setError] = useState(null);
 
-  // Directly set the environment variable
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  // Determine the backend URL based on the environment
+  const backendUrl = process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_BACKEND_URL
+    : 'http://localhost:3001'; // Set your development backend URL here
+
   console.log(`Backend URL ${backendUrl}`);
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(`${backendUrl}/api/signin`, user);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.userId);
-      localStorage.setItem('name', response.data.name); 
+      localStorage.setItem('name', response.data.name);
       if (response.data.role === 'doctor') {
         navigate('/doctors/dashboard');
       } else {
