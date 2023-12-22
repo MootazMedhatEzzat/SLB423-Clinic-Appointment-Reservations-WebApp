@@ -25,7 +25,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://clinic-web-server.mootazmwahab-dev.svc.cluster.local/api/signup', user);
+      const response = await axios.post(`${backendUrl}/api/signup`, user);
       localStorage.setItem('token', response.data.token); 
       localStorage.setItem('userId', response.data.userId); 
       localStorage.setItem('name', user.name); 
