@@ -41,7 +41,7 @@ app.use(cors({
 const doctorRoutes = require('./src/routes/doctors');
 const patientRoutes = require('./src/routes/patients');
 const authRoutes = require('./src/routes/auth');
-
+/*
 // Set CORS headers explicitly for each route
 app.use('/api', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -49,7 +49,7 @@ app.use('/api', (req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
-
+*/
 app.use('/api', doctorRoutes);
 app.use('/api', patientRoutes);
 app.use('/api', authRoutes);
