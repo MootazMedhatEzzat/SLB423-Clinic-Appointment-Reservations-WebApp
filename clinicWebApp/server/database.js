@@ -3,12 +3,13 @@
 const { Pool } = require('pg');
 
 const defaultDbPort = 5432;
+const defaultDbHost = 'clinic-web-database-container';
 const dbPort = process.env.DB_PORT || defaultDbPort;
-const dbPort = process.env.DB_HOST || defaultDbPort;
+const dbHost = process.env.DB_HOST || defaultDbHost;
 
 const pool = new Pool({
     user: 'postgres',
-    host: 'clinic-web-database',
+    host: dbHost,
     database: 'clinic_database',
     password: 'clinic_database_pass',
     port: dbPort,
