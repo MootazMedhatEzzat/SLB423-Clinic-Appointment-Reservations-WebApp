@@ -37,7 +37,7 @@ const PatientDashboard = () => {
     const selectedSlot = doctorSlots.find((slot) => slot.slot_id === slotId);
     slotId = selectedSlot.id;
     try {
-      const response = await fetch('http://localhost:3000/api/patients/bookappointment', {
+      const response = await fetch('http://localhost:3000/api/patients/bookappointment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const PatientDashboard = () => {
       }
 
       // Use the selectedUpdatedAppointmentId instead of updatedSlotId
-      const response = await fetch('http://localhost:3000/api/patients/updateappointment', {
+      const response = await fetch('http://localhost:3000/api/patients/updateappointment`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const PatientDashboard = () => {
 
   const cancelPatientAppointment = async (canceledSlotId) => {
     try {
-      const response = await fetch('http://localhost:3000/api/patients/cancelappointment', {
+      const response = await fetch('http://localhost:3000/api/patients/cancelappointment`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
