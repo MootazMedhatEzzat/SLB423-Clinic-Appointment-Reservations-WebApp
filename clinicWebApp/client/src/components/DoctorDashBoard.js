@@ -14,7 +14,7 @@ const DoctorDashboard = () => {
 
   const fetchDoctorSlots = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/doctors/slots/${userId}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/doctors/slots/${userId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch doctor slots');
       }
@@ -44,7 +44,7 @@ const DoctorDashboard = () => {
         throw new Error('Please select a future date and time.');
       }
   
-      const response = await fetch('http://localhost:3000/api/doctors/addslot', {
+      const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/api/doctors/addslot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
