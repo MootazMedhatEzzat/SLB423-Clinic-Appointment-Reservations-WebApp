@@ -72,7 +72,7 @@ const DoctorDashboard = () => {
 
   const cancelDoctorSlot = async (slotId) => {
     try {
-      const response = await fetch('http://localhost:3000/api/doctors/cancelslot', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/doctors/cancelslot`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
