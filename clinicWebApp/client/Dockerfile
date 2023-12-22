@@ -16,7 +16,7 @@ COPY public ./public
 COPY server.js ./
 
 # Set the backend URL as an environment variable with the correct prefix
-ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL:-http://localhost:3000}
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL:-https://clinic-web-server-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com/}
 
 # Build the frontend application
 RUN npm run build
