@@ -3,6 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/SignUp.css';
 
+// Determine the backend URL based on the environment
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const SignUp = () => {
 
   // Initialize the useNavigate hook
