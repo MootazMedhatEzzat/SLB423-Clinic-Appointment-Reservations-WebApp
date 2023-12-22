@@ -10,7 +10,7 @@ ENV POSTGRES_PASSWORD clinic_database_pass
 COPY init.sql /docker-entrypoint-initdb.d/
 
 # Change ownership of the necessary directories to the non-root user used by PostgreSQL
-RUN chown -R postgres:postgres /var/lib/postgresql/data /var/run/postgresql
+RUN chmod -R 700 /var/lib/postgresql/data /var/run/postgresql
 
 # Expose the port specified in the DB_PORT environment variable or use defaultPort (5432) if not provided
 ENV PORT=${DB_PORT:-5432}
