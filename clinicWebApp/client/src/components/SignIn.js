@@ -16,6 +16,7 @@ const SignIn = () => {
 
   // Directly set the environment variable
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  console.log(`Backend URL ${backendUrl}`);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
