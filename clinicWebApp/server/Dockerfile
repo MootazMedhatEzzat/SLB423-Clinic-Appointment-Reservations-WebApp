@@ -15,6 +15,8 @@ COPY src ./src
 COPY database.js ./
 COPY server.js ./
 
+ENV PORT=${BE_PORT:-3000}
+
 # Expose the port specified in the BE_PORT environment variable or use defaultPort (3000) if not provided
 ENV PORT=${BE_PORT:-3000}
 EXPOSE $PORT
