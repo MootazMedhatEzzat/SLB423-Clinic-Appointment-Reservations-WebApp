@@ -13,9 +13,7 @@ const SignIn = () => {
   const [error, setError] = useState(null);
 
   // Determine the backend URL based on the environment
-  const backendUrl = process.env.NODE_ENV === 'production'
-    ? process.env.REACT_APP_BACKEND_URL
-    : 'http://localhost:3001'; // Set your development backend URL here
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   console.log(`Backend URL ${backendUrl}`);
 
