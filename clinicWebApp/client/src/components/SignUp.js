@@ -3,11 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/SignUp.css';
 
-// Determine the backend URL based on the environment
-const defaultBackendUrl = 'http://localhost:3000';
-const backendUrl = process.env.REACT_APP_BACKEND_URL || defaultBackendUrl;
-console.log(`Backend URL ${backendUrl}`);
-
 const SignUp = () => {
 
   // Initialize the useNavigate hook
@@ -25,7 +20,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${backendUrl}/api/signup`, user);
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/signup`, user);
       localStorage.setItem('token', response.data.token); 
       localStorage.setItem('userId', response.data.userId); 
       localStorage.setItem('name', user.name); 
