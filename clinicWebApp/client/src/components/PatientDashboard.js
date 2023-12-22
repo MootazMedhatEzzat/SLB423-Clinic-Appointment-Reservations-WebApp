@@ -17,7 +17,7 @@ const PatientDashboard = () => {
 
   const fetchReservations = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/patients/${userId}/reservations`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/patients/${userId}/reservations`);
       if (!response.ok) {
         throw new Error('Failed To Fetch Patients Slot');
       }
@@ -37,7 +37,7 @@ const PatientDashboard = () => {
     const selectedSlot = doctorSlots.find((slot) => slot.slot_id === slotId);
     slotId = selectedSlot.id;
     try {
-      const response = await fetch('http://localhost:3000/api/patients/bookappointment`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/patients/bookappointment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const PatientDashboard = () => {
       }
 
       // Use the selectedUpdatedAppointmentId instead of updatedSlotId
-      const response = await fetch('http://localhost:3000/api/patients/updateappointment`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/patients/updateappointment`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const PatientDashboard = () => {
 
   const cancelPatientAppointment = async (canceledSlotId) => {
     try {
-      const response = await fetch('http://localhost:3000/api/patients/cancelappointment`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/patients/cancelappointment`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ const PatientDashboard = () => {
     setDoctorId(selectedDoctorId);
     if (selectedDoctorId) {
       try {
-        const response = await fetch(`http://localhost:3000/api/patients/${selectedDoctorId}/getslots`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/patients/${selectedDoctorId}/getslots`);
         if (!response.ok) {
           throw new Error('Failed to fetch doctor slots');
         }
