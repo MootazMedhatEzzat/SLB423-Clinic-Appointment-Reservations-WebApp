@@ -6,6 +6,7 @@ ENV POSTGRES_DB clinic_database
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD clinic_database_pass
 
+RUN chown -R 1009090000:1009090000 /var/lib/postgresql/data
 # Copy the SQL files to initialize the database
 COPY init.sql /docker-entrypoint-initdb.d/
 
