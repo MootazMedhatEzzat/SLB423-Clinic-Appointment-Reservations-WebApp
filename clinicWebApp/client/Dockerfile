@@ -22,7 +22,7 @@ RUN npm run build
 ENV PORT=${FE_PORT:-3001}
 EXPOSE $PORT
 
-# Set the backend URL as an environment variable
+# Set the backend URL as an environment variable with the correct prefix
 ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL:-https://clinic-web-server-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com}
 
 # Command to start the application
