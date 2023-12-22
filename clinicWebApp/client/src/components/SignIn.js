@@ -3,6 +3,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/SignIn.css';
 
+// Determine the backend URL based on the environment
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+console.log(`Backend URL ${backendUrl}`);
+
 const SignIn = () => {
   const navigate = useNavigate();
 
@@ -11,11 +16,6 @@ const SignIn = () => {
     password: '',
   });
   const [error, setError] = useState(null);
-
-  // Determine the backend URL based on the environment
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
-  console.log(`Backend URL ${backendUrl}`);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
