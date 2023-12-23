@@ -11,7 +11,7 @@
 - Sign up
 - Doctor set his schedule. (Inserting a slot)
 - Patients select doctor, view his available slots, then patient chooses a slot.
-- Patient can update his appointment by change the doctor or the slot.
+- Patient can update his appointment.
 - Patient can cancel his appointment.
 - Patients can view all his reservations.
 
