@@ -7,7 +7,7 @@ docker network create api-network
 # Build and run database container
 cd clinicWebApp/database
 docker build -t clinic-web-database-image .
-docker run -d -p 5432:5432 --name clinic-web-database-container --network api-network -v clinic-web-data:/var/lib/postgresql/data clinic-web-database-image:latest
+docker run -d -p 5432:5432 --name clinic-web-database-container --network api-network -e DB_NAME=clinic_database -e DB_USER=postgres -e DB_PASSWORD=clinic_database_pass -e DB_PORT=5432 -v clinic-web-data:/var/lib/postgresql/data clinic-web-database-image
 
 # Build and run backend server container
 cd ../server
