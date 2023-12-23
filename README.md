@@ -21,6 +21,7 @@
 - http://localhost:3000/api/doctors/addslot
 - http://localhost:3000/api/doctors/cancelslot
 - http://localhost:3000/api/doctors/slots/:id
+- http://localhost:3000/patients/getdoctors
 - http://localhost:3000/api/patients/:id/getslots
 - http://localhost:3000/api/patients/bookappointment
 - http://localhost:3000/api/patients/updateappointment
