@@ -20,7 +20,7 @@ docker network connect ui-network clinic-web-backend
 # Build and run frontend client container
 cd ../client
 docker build -t clinic-web-client .
-docker run -d -p 3001:3001 --name clinic-web-frontend --network ui-network clinic-web-client:latest
+docker run -d -p 3001:3001 --name clinic-web-frontend --network ui-network -e REACT_APP_BACKEND_URL=http://localhost:3000 -e FE_PORT=3001 clinic-web-client:latest
 
 #listing images
 docker images
