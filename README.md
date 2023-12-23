@@ -1,4 +1,5 @@
 # SLB423-Clinic-Appointment-Reservations-WebApp_Phase-1
+During the initial phase of the project, efforts were focused on building and developing the project’s back-end, front-end, and Database. This was based on the tech stack designated to our team.
 
 # Team members
 | Name                                   | Student ID |
