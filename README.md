@@ -1,15 +1,27 @@
 # SLB423-Clinic-Appointment-Reservations-WebApp_Phase-1
 
 # Team members
-- Mootaz Medhat Ezzat Abdelwahab    (20206074)
-- Salma Hossam elden Hassan Mohamed (20206031)
+| Name                                   | Student ID |
+| -------------------------------------- | ---------- |
+| Mootaz Medhat Ezzat Abdelwahab         |  20206074  |
+| Salma Hossam elden Hassan Mohamed      |  20206031  |
 
-# APIs 
+# Features
+- Sign In 
+- Sign up
+- Doctor set his schedule. (Inserting a slot)
+- Patients select doctor, view his available slots, then patient chooses a slot.
+- Patient can update his appointment by change the doctor or the slot.
+- Patient can cancel his appointment.
+- Patients can view all his reservations.
+
+# RESTful APIs 
 - http://localhost:3000/api/signup
 - http://localhost:3000/api/signin
 - http://localhost:3000/api/doctors/addslot
 - http://localhost:3000/api/doctors/cancelslot
 - http://localhost:3000/api/doctors/slots/:id
+- http://localhost:3000/patients/getdoctors
 - http://localhost:3000/api/patients/:id/getslots
 - http://localhost:3000/api/patients/bookappointment
 - http://localhost:3000/api/patients/updateappointment
