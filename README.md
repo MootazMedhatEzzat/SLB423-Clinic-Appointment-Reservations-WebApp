@@ -19,7 +19,7 @@ In the second phase of the project, we extended the delivery of the first phase 
 - Patient can cancel his appointment.
 - Patients can view all his reservations.
 
-# APIs 
+# RESTful APIs
 - http://localhost:3000/api/signup
 - http://localhost:3000/api/signin
 - http://localhost:3000/api/doctors/addslot
