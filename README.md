@@ -1,8 +1,5 @@
 # SLB423-Clinic-Appointment-Reservations-WebApp_Phase-3
-In the second phase of the project, we extended the delivery of the first phase to use the podman container to deploy the application as three interactive containers:
-- Frontend Container
-- Backend Api Container
-- Database Container
+Based on Phase-2, we deploied the containers into OpenShift as containerized services.
 
 # Team members
 | Name                                   | Student ID |
@@ -39,6 +36,8 @@ In the second phase of the project, we extended the delivery of the first phase 
 
 # Running
 ### Clone the repository and execute this script `deploy.sh`
+### Or use the application url on openshift:
+- https://clinic-web-client-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com/
 ### Or clone the repository, open terminal, and run:
 - Create docker networks:
   - `docker network create ui-network`
