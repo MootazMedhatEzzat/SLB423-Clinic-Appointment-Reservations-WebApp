@@ -15,8 +15,12 @@ COPY src ./src
 COPY database.js ./
 COPY server.js ./
 
-# Expose the port on which the application will run
-EXPOSE 3000
+# Set the database host as an environment variable
+ENV PORT=${DB_HOST:-clinic-web-database-container}
+
+# Expose the port specified in the BE_PORT environment variable or use defaultPort (3000) if not provided
+ENV PORT=${BE_PORT:-3000}
+EXPOSE $PORT
 
 # Command to start the application
 CMD ["node", "server.js"]
