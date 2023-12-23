@@ -12,7 +12,7 @@ docker run -d -p 5432:5432 --name clinic-web-database-container --network api-ne
 # Build and run backend server container
 cd ../server
 docker build -t clinic-web-server .
-docker run -d -p 3000:3000 --name clinic-web-backend --network api-network clinic-web-server:latest
+docker run -d -p 3000:3000 --name clinic-web-backend --network api-network -e DB_HOST=clinic-web-database-container -e BE_PORT=3000 clinic-web-server:latest
 
 # Connect backend server to ui-network
 docker network connect ui-network clinic-web-backend
