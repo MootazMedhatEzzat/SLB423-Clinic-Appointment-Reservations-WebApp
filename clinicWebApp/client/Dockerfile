@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Set the backend URL as an environment variable with the correct prefix
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL:-https://clinic-web-server-mootazmwahab-dev.apps.sandbox-m3.1530.p1.openshiftapps.com}
+
 # Copy the rest of the files to the working directory
 COPY src ./src
 COPY public ./public
@@ -18,8 +21,10 @@ COPY server.js ./
 # Build the frontend application
 RUN npm run build
 
-# Expose the port on which the application will run
-EXPOSE 3001
+# Set the port for the server to listen on, with a default of 3001
+ENV PORT=${FE_PORT:-3001}
+# Expose the port specified in the FE_PORT environment variable or use defaultPort (3001) if not provided
+EXPOSE $PORT
 
 # Command to start the application
 CMD ["node", "server.js"]
