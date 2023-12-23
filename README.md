@@ -28,6 +28,11 @@
 - http://localhost:3000/api/patients/cancelappointment
 - http://localhost:3000/api/patients/:id/reservations
 
+# Tech Stack
+| Frontend | Backend | Database |
+| ---------| --------| -------- |
+|   react  | Node.js | postgres |
+
 # Running
 Clone the repository and open two terminals:
 - In the first terminal, run:
