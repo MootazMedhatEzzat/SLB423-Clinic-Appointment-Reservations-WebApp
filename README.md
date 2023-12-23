@@ -1,4 +1,8 @@
 # SLB423-Clinic-Appointment-Reservations-WebApp_Phase-2
+In the second phase of the project, we extended the delivery of the first phase to use the podman container to deploy the application as three interactive containers:
+- Frontend Container
+- Backend Api Container
+- Database Container
 
 # Team members
 | Name                                   | Student ID |
