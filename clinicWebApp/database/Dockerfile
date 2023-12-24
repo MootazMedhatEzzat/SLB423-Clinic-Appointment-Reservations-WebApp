@@ -2,9 +2,9 @@
 FROM postgres:16-alpine3.18
 
 # Set environment variables
-ENV POSTGRES_DB clinic_database
-ENV POSTGRES_USER postgres
-ENV POSTGRES_PASSWORD clinic_database_pass
+ENV POSTGRES_DB=${DB_NAME:-clinic_database}
+ENV POSTGRES_USER=${DB_USER:-postgres}
+ENV POSTGRES_PASSWORD=${DB_PASSWORD:-clinic_database_pass}
 
 # Set a custom data directory
 ENV PGDATA /var/lib/postgresql/data/custom-data
