@@ -2,29 +2,45 @@ pipeline {
     agent any
 
     stages {
-        stage('Build and Deploy Backend') {
+        stage('Build Database Image') {
             steps {
                 script {
-                    dir('clinicWebApp/server') {
-                        // Build backend Docker image
-                        docker.build('clinic-web-backend-image')
-
-                        // Run backend Docker container
-                        docker.image('clinic-web-backend-image').run('-p 3000:3000 --name clinic-web-backend --network api-network -e DB_HOST=clinic-web-database-container -e BE_PORT=3000 clinic-web-backend-image:latest')
+                    dir('clinicWebApp/database') {
+                        bat 'docker build -t clinic-web-database-image .'
                     }
                 }
             }
         }
 
-        stage('Build and Deploy Frontend') {
+        stage('Build Backend Image') {
+            steps {
+                script {
+                    dir('clinicWebApp/server') {
+                        bat 'docker build -t clinic-web-server .'
+                    }
+                }
+            }
+        }
+
+        stage('Build Frontend Image') {
             steps {
                 script {
                     dir('clinicWebApp/client') {
-                        // Build frontend Docker image
-                        docker.build('clinic-web-frontend-image')
+                        bat 'docker build -t clinic-web-client .'
+                    }
+                }
+            }
+        }
 
-                        // Run frontend Docker container
-                        docker.image('clinic-web-frontend-image').run('-p 3001:3001 --name clinic-web-frontend --network ui-network -e REACT_APP_BACKEND_URL=http://clinic-web-backend:3000 -e FE_PORT=3001 clinic-web-frontend-image:latest')
+        stage('Deploy Containers') {
+            steps {
+                script {
+                    dir('clinicWebApp') {
+                        bat '''
+                            docker network create ui-network
+                            docker network create api-network
+                            docker-compose up -d
+                        '''
                     }
                 }
             }
