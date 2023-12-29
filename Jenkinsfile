@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     dir('clinicWebApp/database') {
-                        sh 'docker build -t clinic-web-database-image .'
+                        bat 'docker build -t clinic-web-database-image .'
                     }
                 }
             }
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     dir('clinicWebApp/server') {
-                        sh 'docker build -t clinic-web-server .'
+                        bat 'docker build -t clinic-web-server .'
                     }
                 }
             }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     dir('clinicWebApp/client') {
-                        sh 'docker build -t clinic-web-client .'
+                        bat 'docker build -t clinic-web-client .'
                     }
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     dir('clinicWebApp') {
-                        sh '''
+                        bat '''
                             docker network create ui-network
                             docker network create api-network
                             docker-compose up -d
