@@ -18,7 +18,9 @@ pipeline {
             steps {
                 script {
                     // Build backend Docker image
-                    docker.build('backend-image', '-f backend/Dockerfile .')
+                    dir('clinicWebApp/server') {
+                        docker.build("backend-image", "-f Dockerfile .")
+                    }
                 }
             }
         }
@@ -27,7 +29,9 @@ pipeline {
             steps {
                 script {
                     // Build database Docker image
-                    docker.build('database-image', '-f database/Dockerfile .')
+                    dir('clinicWebApp/database') {
+                        docker.build("database-image", "-f Dockerfile .")
+                    }
                 }
             }
         }
@@ -36,7 +40,9 @@ pipeline {
             steps {
                 script {
                     // Build frontend Docker image
-                    docker.build('frontend-image', '-f frontend/Dockerfile .')
+                    dir('clinicWebApp/client') {
+                        docker.build("frontend-image", "-f Dockerfile .")
+                    }
                 }
             }
         }
