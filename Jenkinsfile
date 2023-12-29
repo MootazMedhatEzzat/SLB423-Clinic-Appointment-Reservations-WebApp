@@ -5,7 +5,7 @@ pipeline {
         stage('Build and Deploy Backend') {
             steps {
                 script {
-                    bat('clinicWebApp/server') {
+                    dir('clinicWebApp/server') {
                         // Build backend Docker image
                         docker.build('clinic-web-backend-image')
 
@@ -19,7 +19,7 @@ pipeline {
         stage('Build and Deploy Frontend') {
             steps {
                 script {
-                    bat('clinicWebApp/client') {
+                    dir('clinicWebApp/client') {
                         // Build frontend Docker image
                         docker.build('clinic-web-frontend-image')
 
