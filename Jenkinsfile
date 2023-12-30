@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build and Deploy') {
             steps {
-                bat './deploy.sh'
+                bat 'deploy.sh'
             }
         }
     }
