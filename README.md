@@ -1,5 +1,7 @@
 # SLB423-Clinic-Appointment-Reservations-WebApp_Phase-4
-Based on Phase-2, we deploied the containers into OpenShift as containerized services.
+This phase of the project is an extension of the third phase. Where we did the following:
+- Creating pipeline for backend and frontend layer using jenkins.
+- Doing performance testing using Jmeter and creating report for it after deploying on openshift.
 
 ![pasted image 0](https://github.com/MootazMedhatEzzat/SLB423-Clinic-Appointment-Reservations-WebApp/assets/97257822/c61c9d5a-cfa8-472d-b4f0-42a3f8649a84)
 
